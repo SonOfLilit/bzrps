@@ -5,25 +5,56 @@ import { Card, default as setup } from "../game/index.js";
 import "./style.scss";
 
 render(setup, {
+  boardSizes: [
+    {
+      name: "desktop",
+      desktop: true,
+      aspectRatio: { min: 8 / 5, max: 2 / 1 },
+    },
+  ],
   settings: {},
   layout: (game) => {
+    const p1 = game.players[0];
+    const p2 = game.players[1];
+    const p1mat = p1.my("mat")!;
+    const p2mat = p2.my("mat")!;
+
+    // game.disableDefaultAppearance();
     game.all(Card).appearance({ aspectRatio: 3 / 4 });
-    game.all(Space, { name: "hand" }).layout(Piece, {
+    for (const mat of [p1mat, p2mat]) {
+      mat.layout("deck", {
+        area: { top: 66, height: 34, left: 0, width: 100 },
+        showBoundingBox: true,
+      });
+      mat.layout("hand", {
+        area: { top: 0, height: 33, left: 0, width: 75 },
+      });
+      mat.layout("sequence", {
+        area: { top: 33, height: 33, left: 0, width: 75 },
+      });
+      mat.layout("stack", {
+        area: { top: 0, height: 66, left: 0 + 75, width: 12.5 },
+      });
+      mat.layout("slots", {
+        area: { top: 0, height: 66, left: 0 + 87.5, width: 12.5 },
+      });
+    }
+    game.all("hand").layout(Piece, {
       rows: { max: 1 },
-      gap: { x: 3, y: 0 },
-      haphazardly: 0.2,
+      gap: { x: 1, y: 0 },
+      //haphazardly: 0.2,
     });
-    game.all(Space, { name: "sequence" }).layout(Piece, {
+    game.all("sequence").layout(Piece, {
       rows: { max: 1 },
-      gap: { x: 3, y: 0 },
-      haphazardly: 0.2,
+      gap: { x: 1, y: 0 },
+      //haphazardly: 0.2,
     });
-    game.all(Space, { name: "stack" }).layout(Piece, {
+    game.all("stack").layout(Piece, {
       columns: { max: 1 },
       gap: { x: 0, y: 3 },
     });
-    game.all(Space, { name: "slots" }).layout(Piece, {
-      rows: { max: 1 },
+    game.all("slots").layout(Piece, {
+      columns: { max: 1 },
       gap: { x: 3, y: 0 },
     });
   },
