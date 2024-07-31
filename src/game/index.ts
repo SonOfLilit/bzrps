@@ -393,10 +393,13 @@ function parseOpcode(char: string): Opcode {
 export class Card extends Piece<OpcodeClash> {
   opcodes: string;
 
+  values() {
+    return this.opcodes.split("").map((op) => parseOpcode(op));
+  }
+
   toString() {
-    return this.opcodes
-      .split("")
-      .map((op) => parseOpcode(op).toString())
+    return this.values()
+      .map((x) => x.toString())
       .join("");
   }
 }
@@ -554,10 +557,9 @@ export default createGame(OpcodeClashPlayer, OpcodeClash, (game) => {
               game.message(
                 `${executePlayer.name} executes card: ${card.toString()}`
               );
-              for (const o of card.opcodes.split("")) {
-                const opcode = parseOpcode(o);
+              for (const opcode of card.values()) {
                 opcode.execute(game, executePlayer);
-                game.message(`Executed opcode: ${opcode.toString()}`);
+                game.message(`Executed ${opcode.toString()} (${opcode.constructor.name})`);
               }
             }
           },

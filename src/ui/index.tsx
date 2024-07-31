@@ -59,9 +59,17 @@ render(setup, {
     // game.disableDefaultAppearance();
     game.all(Card).appearance({
       aspectRatio: 3 / 4,
+      info: (el) => (
+        <div>
+          {el.values().map((o, i) => (
+            <div>{o.toString()} ({o.constructor.name})</div>
+          ))}
+        </div>
+      ),
     });
     game.all(Value).appearance({
       aspectRatio: 1,
+      info: (el) => <div>{el.value}</div>,
     });
   },
 });
