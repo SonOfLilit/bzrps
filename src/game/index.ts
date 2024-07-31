@@ -200,9 +200,9 @@ export class SlotFight extends Opcode {
 
       const result = modValues(p1[i].value - p2[i].value);
       if (result == 1) {
-        game.players[1].hp -= 1;
+        game.players[1].hp -= 2;
       } else if (result == 2) {
-        game.players[0].hp -= 1;
+        game.players[0].hp -= 2;
       }
     }
   }
