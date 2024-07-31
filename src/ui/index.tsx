@@ -32,8 +32,6 @@ render(setup, {
       });
       mat.layout("stack", {
         area: { top: 0, height: 100, left: 0 + 75, width: 12.5 },
-        alignment: "bottom",
-        direction: "btt",
       });
       mat.layout("slots", {
         area: { top: 0, height: 100, left: 0 + 87.5, width: 12.5 },
@@ -50,8 +48,9 @@ render(setup, {
       //haphazardly: 0.2,
     });
     game.all("stack").layout(Piece, {
-      columns: { max: 1 },
-      gap: { x: 0, y: 3 },
+      gap: { x: 0, y: 0 },
+      alignment: "bottom",
+      direction: "btt",
     });
     game.all("slots").layout(Piece, {
       columns: { max: 1 },
@@ -59,6 +58,9 @@ render(setup, {
     });
 
     // game.disableDefaultAppearance();
+    game.all("slots").appearance({
+      render: (el) => <div>❤️ {el.player!.hp}</div>,
+    });
     game.all(Card).appearance({
       aspectRatio: 3 / 4,
       info: (el) => (

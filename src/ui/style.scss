@@ -1,5 +1,5 @@
 #play-area {
-  & .Card > .bz-default{
+  & .Card > .bz-default {
     text-align: center;
     font-size: 3em;
     background: black;
@@ -10,6 +10,18 @@
   & .Scissors > .bz-default {
     text-align: center;
     font-size: 3em;
-    background: gray;
+  }
+  & .Rock > .bz-default {
+    background-color: burlywood;
+  }
+  & .Paper > .bz-default {
+    background-color: lightyellow;
+  }
+  & .Scissors > .bz-default {
+    background-color: lightpink;
+  }
+
+  & .Space[data-name="slots"] > .bz-default {
+    background-color: black;
   }
 }
