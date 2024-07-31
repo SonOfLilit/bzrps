@@ -1,6 +1,6 @@
 import React from "react";
 import { Piece, Space, render } from "@boardzilla/core";
-import { Card, default as setup } from "../game/index.js";
+import { Card, Value, default as setup } from "../game/index.js";
 
 import "./style.scss";
 
@@ -19,11 +19,9 @@ render(setup, {
     const p1mat = p1.my("mat")!;
     const p2mat = p2.my("mat")!;
 
-    // game.disableDefaultAppearance();
-    game.all(Card).appearance({ aspectRatio: 3 / 4 });
     for (const mat of [p1mat, p2mat]) {
       mat.layout("deck", {
-        area: { top: 66, height: 34, left: 0, width: 100 },
+        area: { top: 66, height: 34, left: 0, width: 75 },
         showBoundingBox: true,
       });
       mat.layout("hand", {
@@ -33,10 +31,10 @@ render(setup, {
         area: { top: 33, height: 33, left: 0, width: 75 },
       });
       mat.layout("stack", {
-        area: { top: 0, height: 66, left: 0 + 75, width: 12.5 },
+        area: { top: 0, height: 100, left: 0 + 75, width: 12.5 },
       });
       mat.layout("slots", {
-        area: { top: 0, height: 66, left: 0 + 87.5, width: 12.5 },
+        area: { top: 0, height: 100, left: 0 + 87.5, width: 12.5 },
       });
     }
     game.all("hand").layout(Piece, {
@@ -56,6 +54,14 @@ render(setup, {
     game.all("slots").layout(Piece, {
       columns: { max: 1 },
       gap: { x: 3, y: 0 },
+    });
+
+    // game.disableDefaultAppearance();
+    game.all(Card).appearance({
+      aspectRatio: 3 / 4,
+    });
+    game.all(Value).appearance({
+      aspectRatio: 1,
     });
   },
 });

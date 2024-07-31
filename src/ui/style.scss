@@ -1,2 +1,15 @@
 #play-area {
+  & .Card > .bz-default{
+    text-align: center;
+    font-size: 3em;
+    background: black;
+  }
+
+  & .Rock > .bz-default,
+  & .Paper > .bz-default,
+  & .Scissors > .bz-default {
+    text-align: center;
+    font-size: 3em;
+    background: gray;
+  }
 }
