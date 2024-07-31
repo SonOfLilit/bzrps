@@ -391,14 +391,14 @@ function parseOpcode(char: string): Opcode {
 }
 
 export class Card extends Piece<OpcodeClash> {
-  opcodes: string;
+  codes: string;
 
-  values() {
-    return this.opcodes.split("").map((op) => parseOpcode(op));
+  opcodes() {
+    return this.codes.split("").map((op) => parseOpcode(op));
   }
 
   toString() {
-    return this.values()
+    return this.opcodes()
       .map((x) => x.toString())
       .join("");
   }
@@ -423,7 +423,7 @@ function generateDeck(game: OpcodeClash, player: OpcodeClashPlayer) {
   cardCounts.forEach((count) => {
     const cardId = `card-${Math.random()}`;
     const opcodes = generateCard(count);
-    player.my("deck")!.create(Card, cardId, { opcodes });
+    player.my("deck")!.create(Card, cardId, { codes: opcodes });
   });
 }
 

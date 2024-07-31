@@ -61,7 +61,7 @@ render(setup, {
       aspectRatio: 3 / 4,
       info: (el) => (
         <div>
-          {el.values().map((o, i) => (
+          {el.opcodes().map((o, i) => (
             <div>{o.toString()} ({o.constructor.name})</div>
           ))}
         </div>
