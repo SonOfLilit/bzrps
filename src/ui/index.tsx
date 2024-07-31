@@ -63,9 +63,16 @@ render(setup, {
     });
     game.all(Card).appearance({
       aspectRatio: 3 / 4,
-      info: (el) => (
+      render: (el) => (
         <div>
           {el.opcodes().map((o, i) => (
+            <span className={(i == el.currentOpcode) ? "active" : undefined}>{o.toString()}</span>
+          ))}
+        </div>
+      ),
+      info: (el) => (
+        <div>
+          {el.opcodes().map((o) => (
             <div>
               {o.toString()} ({o.constructor.name})
             </div>

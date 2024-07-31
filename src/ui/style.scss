@@ -1,8 +1,17 @@
 #play-area {
-  & .Card > .bz-default {
+  & .Card {
     text-align: center;
     font-size: 3em;
     background: black;
+
+    &.clickable {
+      box-shadow: 0 0 4px 2px yellow;
+    }
+
+    & .active {
+      display: inline-block;
+      animation: spin 1s ease-out;
+    }
   }
 
   & .Rock > .bz-default,
@@ -23,5 +32,14 @@
 
   & .Space[data-name="slots"] > .bz-default {
     background-color: black;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
   }
 }

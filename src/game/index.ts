@@ -392,6 +392,7 @@ function parseOpcode(char: string): Opcode {
 
 export class Card extends Piece<OpcodeClash> {
   codes: string;
+  currentOpcode?: number;
 
   opcodes() {
     return this.codes.split("").map((op) => parseOpcode(op));
@@ -551,17 +552,18 @@ export default createGame(OpcodeClashPlayer, OpcodeClash, (game) => {
         eachPlayer({
           name: "executePlayer",
           do: ({ executePlayer }) => {
-            const i = game.sequencePosition;
-            const card = executePlayer.my("sequence")!.all(Card)[i];
+            const card = executePlayer.my("sequence")!.all(Card)[game.sequencePosition];
             if (card) {
               game.message(
                 `${executePlayer.name} executes card: ${card.toString()}`
               );
-              for (const opcode of card.opcodes()) {
-                opcode.execute(game, executePlayer);
-                game.message(`Executed ${opcode.toString()} (${opcode.constructor.name})`);
+              const opcodes = card.opcodes();
+              for (let i = 0; i < opcodes.length; i++) {
+                card.currentOpcode = i;
+                opcodes[i].execute(game, executePlayer);
+                game.addDelay();
               }
-              game.addDelay();
+              card.currentOpcode = undefined;
             }
           },
         }),
