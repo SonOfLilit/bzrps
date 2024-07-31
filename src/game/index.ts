@@ -557,10 +557,11 @@ export default createGame(OpcodeClashPlayer, OpcodeClash, (game) => {
               game.message(
                 `${executePlayer.name} executes card: ${card.toString()}`
               );
-              for (const opcode of card.values()) {
+              for (const opcode of card.opcodes()) {
                 opcode.execute(game, executePlayer);
                 game.message(`Executed ${opcode.toString()} (${opcode.constructor.name})`);
               }
+              game.addDelay();
             }
           },
         }),

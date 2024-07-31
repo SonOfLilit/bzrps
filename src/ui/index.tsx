@@ -32,6 +32,8 @@ render(setup, {
       });
       mat.layout("stack", {
         area: { top: 0, height: 100, left: 0 + 75, width: 12.5 },
+        alignment: "bottom",
+        direction: "btt",
       });
       mat.layout("slots", {
         area: { top: 0, height: 100, left: 0 + 87.5, width: 12.5 },
@@ -62,7 +64,9 @@ render(setup, {
       info: (el) => (
         <div>
           {el.opcodes().map((o, i) => (
-            <div>{o.toString()} ({o.constructor.name})</div>
+            <div>
+              {o.toString()} ({o.constructor.name})
+            </div>
           ))}
         </div>
       ),
